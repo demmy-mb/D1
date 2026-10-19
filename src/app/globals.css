@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* ============================
    2004 THEFACEBOOK DESIGN TOKENS
@@ -36,6 +36,7 @@ body {
   background: var(--fb-bg);
   color: var(--fb-text);
   font-size: 15px;
+  font-weight: 500;
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
 }
@@ -112,7 +113,7 @@ img {
 
 .fb-header__nav a.active {
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ============================
@@ -132,12 +133,12 @@ img {
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--fb-text);
 }
 
 .profile-bar__right {
-  font-weight: 400;
+  font-weight: 500;
   color: var(--fb-text-light);
 }
 
@@ -173,7 +174,7 @@ img {
 
 .fb-sidebar__search-label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--fb-text-light);
   margin-bottom: 4px;
 }
@@ -278,7 +279,7 @@ img {
 
 .fb-box__header-edit {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--fb-text-link);
 }
 
@@ -433,7 +434,7 @@ img {
   color: #fff;
   border: 1px solid var(--fb-blue-dark);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .fb-btn:hover {
@@ -493,7 +494,7 @@ img {
 
 .wall-post__verb {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--fb-text-light);
 }
 
@@ -561,7 +562,7 @@ img {
 
 .wall-post__polaroid-caption {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .wall-post__polaroid-date {
@@ -617,7 +618,7 @@ img {
 }
 
 .album-header__count {
-  font-weight: 400;
+  font-weight: 500;
   color: var(--fb-text-light);
 }
 
@@ -633,6 +634,7 @@ img {
    INFO PAGE — bio, quote, tags
    ============================ */
 .info-bio {
+  font-weight: 500;
   white-space: pre-line;
   font-size: 15px;
   line-height: 1.65;
@@ -645,7 +647,7 @@ img {
   border-left: 3px solid var(--fb-blue);
   font-size: 20px;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--fb-text-link);
 }
 
@@ -794,7 +796,7 @@ img {
 .content-tabs__item {
   padding: 8px 18px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--fb-text);
   cursor: pointer;
   border: none;
@@ -904,7 +906,7 @@ img {
   font-size: 12px;
   color: var(--fb-blue-light);
   margin-top: 6px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .talent-card__inner:hover .talent-card__cta {
@@ -927,7 +929,7 @@ img {
 
 .archive-back {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   justify-self: start;
 }
 
@@ -977,7 +979,7 @@ img {
 
   .archive-back {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   justify-self: start;
 }
 
