@@ -538,26 +538,6 @@ img {
   margin-top: 10px;
 }
 
-.wall-post__actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 6px;
-}
-
-.wall-post__action {
-  font-size: 13px;
-  color: var(--fb-text-link);
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px 0;
-  font-family: var(--font-main);
-}
-
-.wall-post__action:hover {
-  text-decoration: underline;
-}
-
 /* Polaroid posts */
 .wall-post--polaroid .wall-post__image-wrap {
   background: #fff;
@@ -1054,8 +1034,7 @@ img {
   }
 
   .wall-post__header,
-  .wall-post__caption,
-  .wall-post__actions {
+  .wall-post__caption {
     padding: 0 12px;
   }
 

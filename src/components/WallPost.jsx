@@ -61,10 +61,6 @@ export default function WallPost({ photo, model, onImageClick, priority = false 
         <div className="wall-post__caption">{photo.caption}</div>
       )}
 
-      <div className="wall-post__actions">
-        <button className="wall-post__action">Write a comment...</button>
-        <button className="wall-post__action">Like</button>
-      </div>
     </article>
   );
 }
