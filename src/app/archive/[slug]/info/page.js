@@ -111,7 +111,6 @@ export default function ArchiveInfo({ params }) {
           <Row label="Tagline">{model.tagline}</Row>
           <Row label="Location">{model.location}</Row>
           <Row label="Agency">{model.agency}</Row>
-          <Row label="Member Since">{model.joined}</Row>
         </div>
       </div>
 
