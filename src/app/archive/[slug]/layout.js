@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { use } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Sidebar from "@/components/Sidebar";
 import { sanityClient } from "@/sanity/client";
 import { getModelBySlug as getModelBySlugQuery } from "@/sanity/queries";
 
@@ -56,17 +55,10 @@ export default function ArchiveLayout({ children, params }) {
       transition={{ duration: 0.4 }}
       style={themeStyles}
     >
-      {/* Profile Bar */}
-      <div className="profile-bar profile-bar--archive">
-        <div className="profile-bar__inner">
-          <span>Profile · {model.name}</span>
-          <span className="profile-bar__right">{model.location}</span>
-        </div>
-      </div>
-
-      {/* Archive Layout — Sidebar + Content */}
       <div className="archive-layout">
-        <Sidebar model={model} baseUrl={baseUrl} />
+        <Link href="/" className="archive-back">
+          ← All talent
+        </Link>
         <main className="fb-content">{children}</main>
       </div>
     </motion.div>

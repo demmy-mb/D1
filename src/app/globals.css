@@ -857,7 +857,7 @@ img {
    ============================ */
 .talent-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
   justify-content: center;
   gap: 20px;
 }
@@ -935,14 +935,20 @@ img {
    ARCHIVE LAYOUT — Per-model profile
    ============================ */
 .archive-layout {
-  max-width: 1080px;
-  margin: 10px auto 24px;
+  max-width: 820px;
+  margin: 12px auto 24px;
   padding: 0 16px;
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr;
+  gap: 8px;
   min-height: calc(100vh - 80px);
   width: 100%;
+}
+
+.archive-back {
+  font-size: 14px;
+  font-weight: 600;
+  justify-self: start;
 }
 
 .profile-bar--archive {
@@ -985,7 +991,17 @@ img {
     display: none;
   }
 
-  .profile-bar--archive {
+  .archive-back {
+    padding: 10px 12px 2px;
+  }
+
+  .archive-back {
+  font-size: 14px;
+  font-weight: 600;
+  justify-self: start;
+}
+
+.profile-bar--archive {
     display: none;
   }
 
