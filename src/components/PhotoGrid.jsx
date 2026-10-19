@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+// Masonry grid — photos keep their real shape instead of being cropped square
 export default function PhotoGrid({ photos, onPhotoClick }) {
   return (
     <div className="photo-grid">
@@ -15,27 +16,15 @@ export default function PhotoGrid({ photos, onPhotoClick }) {
             <Image
               src={photo.src}
               alt={photo.caption}
-              width={300}
-              height={300}
+              width={photo.width || 600}
+              height={photo.height || 750}
               className="photo-grid__img"
+              sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, 300px"
+              placeholder={photo.lqip ? "blur" : "empty"}
+              blurDataURL={photo.lqip || undefined}
             />
           ) : (
-            <div 
-              style={{
-                width: "100%", 
-                height: "100%", 
-                background: "#eee", 
-                display: "flex", 
-                alignItems: "center", 
-                justifyContent: "center",
-                textAlign: "center",
-                fontSize: "11px",
-                color: "#aaa",
-                padding: "4px"
-              }}
-            >
-              Missing Image
-            </div>
+            <div className="photo-grid__missing">Missing Image</div>
           )}
         </div>
       ))}

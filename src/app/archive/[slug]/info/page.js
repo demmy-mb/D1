@@ -6,6 +6,16 @@ import TabNav from "@/components/TabNav";
 import { sanityClient } from "@/sanity/client";
 import { getModelBySlug as getModelBySlugQuery } from "@/sanity/queries";
 
+function Row({ label, children }) {
+  if (!children) return null;
+  return (
+    <div className="info-table__row">
+      <span className="info-table__label">{label}:</span>
+      <span className="info-table__value">{children}</span>
+    </div>
+  );
+}
+
 export default function ArchiveInfo({ params }) {
   const { slug } = use(params);
   const [model, setModel] = useState(null);
@@ -33,109 +43,92 @@ export default function ArchiveInfo({ params }) {
   if (!model) return null;
 
   const baseUrl = `/archive/${slug}`;
+  const emails = [model.contact, ...(model.emails || [])].filter(Boolean);
+  const stats = model.stats || {};
+  const hasStats = Object.values(stats).some(Boolean);
 
   return (
     <>
       <TabNav baseUrl={baseUrl} />
 
       <div className="fb-box">
-        <div className="fb-box__header">
-          Basic Information
-          <span className="fb-box__header-edit">[ edit ]</span>
-        </div>
+        <div className="fb-box__header">About</div>
         <div className="fb-box__body">
-          <div className="info-table__row">
-            <span className="info-table__label">Name:</span>
-            <span className="info-table__value">{model.name}</span>
+          <p className="info-bio">{model.bio}</p>
+          {model.quote && (
+            <blockquote className="info-quote">“{model.quote}”</blockquote>
+          )}
+        </div>
+      </div>
+
+      {model.categories?.length > 0 && (
+        <div className="fb-box">
+          <div className="fb-box__header">Categories</div>
+          <div className="fb-box__body">
+            <div className="info-tags">
+              {model.categories.map((cat) => (
+                <span key={cat} className="info-tag">
+                  {cat}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Tagline:</span>
-            <span className="info-table__value">{model.tagline}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Location:</span>
-            <span className="info-table__value">{model.location}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Agency:</span>
-            <span className="info-table__value">{model.agency}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Member Since:</span>
-            <span className="info-table__value">{model.joined}</span>
-          </div>
+        </div>
+      )}
+
+      <div className="fb-box">
+        <div className="fb-box__header">Contacts</div>
+        <div className="fb-box__body">
+          <Row label="Phone">
+            {model.phone && <a href={`tel:${model.phone}`}>{model.phone}</a>}
+          </Row>
+          <Row label="Instagram">
+            {model.instagram && (
+              <a
+                href={`https://instagram.com/${model.instagram.replace(/^@/, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                @{model.instagram.replace(/^@/, "")}
+              </a>
+            )}
+          </Row>
+          <Row label={emails.length > 1 ? "Emails" : "Email"}>
+            {emails.length > 0 &&
+              emails.map((email) => (
+                <a key={email} href={`mailto:${email}`} className="info-email">
+                  {email}
+                </a>
+              ))}
+          </Row>
         </div>
       </div>
 
       <div className="fb-box">
-        <div className="fb-box__header">
-          About
-          <span className="fb-box__header-edit">[ edit ]</span>
-        </div>
+        <div className="fb-box__header">Basic Information</div>
         <div className="fb-box__body">
-          <p
-            style={{
-              fontSize: "12px",
-              lineHeight: "1.6",
-              color: "var(--fb-text)",
-            }}
-          >
-            {model.bio}
-          </p>
+          <Row label="Name">{model.name}</Row>
+          <Row label="Tagline">{model.tagline}</Row>
+          <Row label="Location">{model.location}</Row>
+          <Row label="Agency">{model.agency}</Row>
+          <Row label="Member Since">{model.joined}</Row>
         </div>
       </div>
 
-      <div className="fb-box">
-        <div className="fb-box__header">
-          Measurements
-          <span className="fb-box__header-edit">[ edit ]</span>
-        </div>
-        <div className="fb-box__body">
-          <div className="info-table__row">
-            <span className="info-table__label">Height:</span>
-            <span className="info-table__value">{model.stats?.height}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Bust:</span>
-            <span className="info-table__value">{model.stats?.bust}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Waist:</span>
-            <span className="info-table__value">{model.stats?.waist}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Hips:</span>
-            <span className="info-table__value">{model.stats?.hips}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Shoe Size:</span>
-            <span className="info-table__value">{model.stats?.shoe}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Eye Color:</span>
-            <span className="info-table__value">{model.stats?.eyes}</span>
-          </div>
-          <div className="info-table__row">
-            <span className="info-table__label">Hair Color:</span>
-            <span className="info-table__value">{model.stats?.hair}</span>
+      {hasStats && (
+        <div className="fb-box">
+          <div className="fb-box__header">Measurements</div>
+          <div className="fb-box__body">
+            <Row label="Height">{stats.height}</Row>
+            <Row label="Bust">{stats.bust}</Row>
+            <Row label="Waist">{stats.waist}</Row>
+            <Row label="Hips">{stats.hips}</Row>
+            <Row label="Shoe Size">{stats.shoe}</Row>
+            <Row label="Eye Color">{stats.eyes}</Row>
+            <Row label="Hair Color">{stats.hair}</Row>
           </div>
         </div>
-      </div>
-
-      <div className="fb-box">
-        <div className="fb-box__header">
-          Contact Information
-          <span className="fb-box__header-edit">[ edit ]</span>
-        </div>
-        <div className="fb-box__body">
-          <div className="info-table__row">
-            <span className="info-table__label">Email:</span>
-            <span className="info-table__value">
-              <a href={`mailto:${model.contact}`}>{model.contact}</a>
-            </span>
-          </div>
-        </div>
-      </div>
+      )}
     </>
   );
 }

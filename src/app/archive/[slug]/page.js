@@ -8,6 +8,7 @@ import WallPost from "@/components/WallPost";
 import Lightbox from "@/components/Lightbox";
 import { sanityClient } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
+import { postToPhoto } from "@/sanity/photo";
 import {
   getModelBySlug as getModelBySlugQuery,
   getModelPosts,
@@ -49,155 +50,72 @@ export default function ArchiveWall({ params }) {
 
   const baseUrl = `/archive/${slug}`;
 
-  // Build profile image URL
   const profileImageUrl = model.profileImage
-    ? urlFor(model.profileImage).width(400).height(500).url()
+    ? urlFor(model.profileImage).width(240).height(300).url()
     : null;
 
   const profileAvatarUrl = model.profileImage
-    ? urlFor(model.profileImage).width(64).height(64).url()
+    ? urlFor(model.profileImage).width(80).height(80).url()
     : null;
 
-  // Transform posts for Lightbox compatibility
-  const lightboxPhotos = posts.map((post) => ({
-    id: post._id,
-    src: post.image ? urlFor(post.image).width(1200).url() : null,
-    caption: post.caption || "",
-    date: post.timestamp
-      ? new Date(post.timestamp).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : "",
-  }));
+  const photos = posts.map((post) => postToPhoto(post, 1200));
 
   return (
     <>
-      {/* Profile Top Section — Picture + Info */}
-      <div className="profile-top" style={{ marginBottom: "8px" }}>
-        {/* Picture Box */}
-        <div className="fb-box">
-          <div className="fb-box__header">
-            Picture
-            <span className="fb-box__header-edit">[ edit ]</span>
-          </div>
-          <div className="fb-box__body profile-pic-section">
-            <div className="profile-pic-section__image-wrap">
-              {profileImageUrl ? (
-                <Image
-                  src={profileImageUrl}
-                  alt={model.name}
-                  width={200}
-                  height={250}
-                  className="profile-pic-section__image"
-                  priority
-                />
-              ) : (
-                <div
-                  className="profile-pic-section__image"
-                  style={{ width: 200, height: 250, background: "#eee" }}
-                />
-              )}
-            </div>
-            <ul className="profile-pic-section__links">
-              <li>
-                <a href={`${baseUrl}/photos`}>View My Photos</a>
-              </li>
-              <li>
-                <a href={`${baseUrl}/info`}>View My Info</a>
-              </li>
-              <li>
-                <a href={`mailto:${model.contact}`}>Book Me</a>
-              </li>
-            </ul>
-          </div>
+      {/* Compact profile header — keeps the photos above the fold */}
+      <div className="fb-box profile-hero">
+        <div className="profile-hero__pic">
+          {profileImageUrl ? (
+            <Image
+              src={profileImageUrl}
+              alt={model.name}
+              width={120}
+              height={150}
+              priority
+            />
+          ) : (
+            <div className="profile-hero__pic-empty" />
+          )}
         </div>
-
-        {/* Information Box */}
-        <div className="fb-box">
-          <div className="fb-box__header">
-            Information
-            <span className="fb-box__header-edit">[ edit ]</span>
+        <div className="profile-hero__info">
+          <h1 className="profile-hero__name">{model.name}</h1>
+          {model.tagline && (
+            <div className="profile-hero__tagline">{model.tagline}</div>
+          )}
+          <div className="profile-hero__meta">
+            {[model.location, model.stats?.height, `${posts.length} photos`]
+              .filter(Boolean)
+              .join(" · ")}
           </div>
-          <div className="fb-box__body">
-            <div className="info-table__section-title">Account Info:</div>
-            <div className="info-table__row">
-              <span className="info-table__label">Name:</span>
-              <span className="info-table__value">{model.name}</span>
-            </div>
-            <div className="info-table__row">
-              <span className="info-table__label">Member Since:</span>
-              <span className="info-table__value">{model.joined}</span>
-            </div>
-
-            <div
-              className="info-table__section-title"
-              style={{ marginTop: "10px" }}
-            >
-              Basic Info:
-            </div>
-            <div className="info-table__row">
-              <span className="info-table__label">Agency:</span>
-              <span className="info-table__value">{model.agency}</span>
-            </div>
-            <div className="info-table__row">
-              <span className="info-table__label">Location:</span>
-              <span className="info-table__value">{model.location}</span>
-            </div>
-            <div className="info-table__row">
-              <span className="info-table__label">Height:</span>
-              <span className="info-table__value">{model.stats?.height}</span>
-            </div>
-
-            <div
-              className="info-table__section-title"
-              style={{ marginTop: "10px" }}
-            >
-              Contact Info:
-            </div>
-            <div className="info-table__row">
-              <span className="info-table__label">Email:</span>
-              <span className="info-table__value">
-                <a href={`mailto:${model.contact}`}>{model.contact}</a>
-              </span>
-            </div>
+          <div className="profile-hero__actions">
+            <a className="fb-btn" href={`mailto:${model.contact}`}>
+              Book Me
+            </a>
+            <a className="fb-btn fb-btn--ghost" href={`${baseUrl}/info`}>
+              Info
+            </a>
           </div>
         </div>
       </div>
 
       {/* Tabs + Wall */}
       <TabNav baseUrl={baseUrl} />
-      <div className="fb-box">
+      <div className="fb-box fb-box--wall">
         <div className="fb-box__header">
           The Wall
           <span className="fb-box__header-edit">{posts.length} posts</span>
         </div>
         <div className="fb-box__body">
-          <div className="wall-intro">
-            Displaying {posts.length} wall posts.
-          </div>
-          {posts.map((post, index) => (
+          {photos.map((photo, index) => (
             <WallPost
-              key={post._id}
-              photo={{
-                id: post._id,
-                src: post.image ? urlFor(post.image).width(1000).url() : null,
-                caption: post.caption || "",
-                postType: post.postType,
-                date: post.timestamp
-                  ? new Date(post.timestamp).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })
-                  : "",
-              }}
+              key={photo.id}
+              photo={photo}
+              priority={index === 0}
               model={{
                 name: model.name,
                 profilePhoto: profileAvatarUrl || "",
               }}
-              onImageClick={() => setLightboxPhoto(lightboxPhotos[index])}
+              onImageClick={() => setLightboxPhoto(photo)}
             />
           ))}
         </div>
@@ -205,7 +123,7 @@ export default function ArchiveWall({ params }) {
 
       {lightboxPhoto && (
         <Lightbox
-          photos={lightboxPhotos}
+          photos={photos}
           currentPhoto={lightboxPhoto}
           onClose={() => setLightboxPhoto(null)}
           onNavigate={setLightboxPhoto}

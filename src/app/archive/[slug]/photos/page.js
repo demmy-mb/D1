@@ -6,7 +6,7 @@ import TabNav from "@/components/TabNav";
 import PhotoGrid from "@/components/PhotoGrid";
 import Lightbox from "@/components/Lightbox";
 import { sanityClient } from "@/sanity/client";
-import { urlFor } from "@/sanity/image";
+import { postToPhoto } from "@/sanity/photo";
 import {
   getModelBySlug as getModelBySlugQuery,
   getModelPosts,
@@ -48,20 +48,7 @@ export default function ArchivePhotos({ params }) {
 
   const baseUrl = `/archive/${slug}`;
 
-  // Transform posts to photo format compatible with PhotoGrid + Lightbox
-  const photos = posts.map((post) => ({
-    id: post._id,
-    src: post.image ? urlFor(post.image).width(800).url() : null,
-    caption: post.caption || "",
-    date: post.timestamp
-      ? new Date(post.timestamp).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : "",
-    album: post.album || "Uncategorized",
-  }));
+  const photos = posts.map((post) => postToPhoto(post, 800));
 
   // Group photos by album
   const albums = {};

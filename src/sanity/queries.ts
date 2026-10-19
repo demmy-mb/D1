@@ -14,6 +14,11 @@ export const getAllModels = `
     contact,
     joined,
     themeColor,
+    emails,
+    phone,
+    instagram,
+    quote,
+    categories,
     stats
   }
 `;
@@ -32,6 +37,11 @@ export const getModelBySlug = `
     contact,
     joined,
     themeColor,
+    emails,
+    phone,
+    instagram,
+    quote,
+    categories,
     stats
   }
 `;
@@ -41,6 +51,8 @@ export const getModelPosts = `
   *[_type == "post" && model._ref == $modelId] | order(timestamp desc) {
     _id,
     image,
+    "dims": image.asset->metadata.dimensions{width, height},
+    "lqip": image.asset->metadata.lqip,
     caption,
     timestamp,
     postType,

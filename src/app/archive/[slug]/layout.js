@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { use } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Sidebar from "@/components/Sidebar";
@@ -11,7 +10,6 @@ import { getModelBySlug as getModelBySlugQuery } from "@/sanity/queries";
 
 export default function ArchiveLayout({ children, params }) {
   const { slug } = use(params);
-  const pathname = usePathname();
   const [model, setModel] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,11 +21,6 @@ export default function ArchiveLayout({ children, params }) {
         setLoading(false);
       });
   }, [slug]);
-
-  // Don't show the archive layout chrome on the login page
-  if (pathname.endsWith("/login")) {
-    return children;
-  }
 
   if (loading) {
     return (

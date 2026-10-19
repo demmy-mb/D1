@@ -46,7 +46,7 @@ export default function TalentGallery() {
             {models.map((model, i) => (
               <Link
                 key={model._id}
-                href={`/archive/${model.slug}/login`}
+                href={`/archive/${model.slug}`}
                 className="talent-card"
               >
                 <motion.div
@@ -60,12 +60,14 @@ export default function TalentGallery() {
                     {model.profileImage ? (
                       <Image
                         src={urlFor(model.profileImage)
-                          .width(600)
-                          .height(750)
+                          .width(900)
+                          .height(1125)
                           .url()}
                         alt={model.name}
-                        width={300}
-                        height={375}
+                        width={900}
+                        height={1125}
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 360px"
+                        priority={i < 2}
                         className="talent-card__image"
                       />
                     ) : (
@@ -87,7 +89,7 @@ export default function TalentGallery() {
                   <div className="talent-card__info">
                     <div className="talent-card__name">{model.name}</div>
                     <div className="talent-card__tagline">{model.tagline}</div>
-                    <div className="talent-card__cta">Access Archive →</div>
+                    <div className="talent-card__cta">View Archive →</div>
                   </div>
                 </motion.div>
               </Link>
