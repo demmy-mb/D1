@@ -4,19 +4,19 @@
    2004 THEFACEBOOK DESIGN TOKENS
    ============================ */
 :root {
-  --fb-blue: #3b5998;
-  --fb-blue-dark: #2b4170;
-  --fb-blue-light: #6d84b4;
-  --fb-blue-pale: #d8dfea;
-  --fb-blue-header: #4e69a2;
-  --fb-bg: #e9eaed;
+  --fb-blue: #a31521;
+  --fb-blue-dark: #5e0b12;
+  --fb-blue-light: #d42c3b;
+  --fb-blue-pale: #f5e6e8;
+  --fb-blue-header: #141414;
+  --fb-bg: #0d0d0d;
   --fb-white: #ffffff;
-  --fb-border: #9dadc2;
-  --fb-border-light: #bdc7d8;
-  --fb-text: #333333;
-  --fb-text-light: #666666;
-  --fb-text-link: #3b5998;
-  --fb-section-bg: #d8dfea;
+  --fb-border: #b89ea1;
+  --fb-border-light: #d9c8ca;
+  --fb-text: #1f1f1f;
+  --fb-text-light: #5c5254;
+  --fb-text-link: #a31521;
+  --fb-section-bg: #f5e6e8;
   --font-main: "Inter", Tahoma, "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
@@ -33,7 +33,12 @@
 
 body {
   font-family: var(--font-main);
-  background: var(--fb-bg);
+  background-color: var(--fb-bg);
+  background-image: url("/graffiti-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--fb-text);
   font-size: 15px;
   font-weight: 500;
@@ -931,6 +936,49 @@ img {
   font-size: 14px;
   font-weight: 700;
   justify-self: start;
+  color: #ffffff;
+  background: rgba(15, 15, 15, 0.82);
+  border: 1px solid rgba(212, 44, 59, 0.55);
+  padding: 5px 12px;
+  backdrop-filter: blur(4px);
+}
+
+.archive-back:hover {
+  color: #ff4d5e;
+  text-decoration: none;
+}
+
+.category-group {
+  margin-bottom: 24px;
+  border: 1px solid var(--fb-border-light);
+  background: #fdfafb;
+  padding: 12px;
+}
+
+.category-group:last-child {
+  margin-bottom: 0;
+}
+
+.category-group__title {
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: var(--fb-blue);
+  padding: 8px 12px;
+  margin: -12px -12px 14px -12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-group__count {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .profile-bar--archive {
@@ -974,16 +1022,13 @@ img {
   }
 
   .archive-back {
-    padding: 10px 12px 2px;
+    margin: 8px 12px 4px;
+    font-size: 14px;
+    font-weight: 700;
+    justify-self: start;
   }
 
-  .archive-back {
-  font-size: 14px;
-  font-weight: 700;
-  justify-self: start;
-}
-
-.profile-bar--archive {
+  .profile-bar--archive {
     display: none;
   }
 
