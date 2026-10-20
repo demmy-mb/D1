@@ -1,57 +1,7 @@
 // Image catalog — maps files to wall posts and album data
-// Add or remove entries here to update the portfolio
+// Managed dynamically via Sanity (see scripts/sync-shoots.mjs)
 
-const photos = [
-  {
-    id: 1,
-    src: "/photos/IMG_4290.jpg",
-    caption: "Studio session — natural light",
-    date: "February 20, 2026",
-    album: "Studio",
-  },
-  {
-    id: 2,
-    src: "/photos/IMG_4292.jpg",
-    caption: "Editorial look",
-    date: "February 19, 2026",
-    album: "Studio",
-  },
-  {
-    id: 3,
-    src: "/photos/IMG_4396.jpg",
-    caption: "On location",
-    date: "February 15, 2026",
-    album: "On Location",
-  },
-  {
-    id: 4,
-    src: "/photos/IMG_5279.jpg",
-    caption: "Golden hour portrait",
-    date: "February 10, 2026",
-    album: "Portraits",
-  },
-  {
-    id: 5,
-    src: "/photos/IMG_5660.jpg",
-    caption: "Campaign shoot",
-    date: "February 5, 2026",
-    album: "Campaigns",
-  },
-  {
-    id: 6,
-    src: "/photos/IMG_5661.jpg",
-    caption: "Behind the scenes",
-    date: "January 28, 2026",
-    album: "Campaigns",
-  },
-  {
-    id: 7,
-    src: "/photos/IMG_5662.jpg",
-    caption: "Monochrome series",
-    date: "January 20, 2026",
-    album: "Portraits",
-  },
-];
+const photos = [];
 
 export default photos;
 
