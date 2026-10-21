@@ -38,6 +38,7 @@ await client
       "BLUEBERRIFACTORI 🐇 — Disruption Campaign",
       "New York Love Campaign",
       "The Future Campaign",
+      "SUPASTAR SYNDROME",
       "Lookbook",
       "Brand",
       "Streetwear",

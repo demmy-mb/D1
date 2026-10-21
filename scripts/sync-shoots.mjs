@@ -33,6 +33,8 @@ const CATEGORY_MAP = {
   "New york love camp": "New York Love Campaign",
   "street wear": "Streetwear",
   "Styling cap wrk": "Styling Campaign Work",
+  "Supastar symdrom": "SUPASTAR SYNDROME",
+  "supastart symdrome 2": "SUPASTAR SYNDROME",
   "THE FUTURE CAMPAIGN": "The Future Campaign",
 };
 
