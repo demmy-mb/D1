@@ -29,6 +29,7 @@ const client = createClient({
 const CATEGORY_MAP = {
   "brand": "Brand",
   "brand2 brtii distribution campaing": "BLUEBERRIFACTORI 🐇 — Disruption Campaign",
+  "look book": "Lookbook",
   "New york love camp": "New York Love Campaign",
   "street wear": "Streetwear",
   "Styling cap wrk": "Styling Campaign Work",
