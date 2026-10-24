@@ -36,6 +36,7 @@ const CATEGORY_MAP = {
   "Supastar symdrom": "SUPASTAR SYNDROME",
   "supastart symdrome 2": "SUPASTAR SYNDROME",
   "THE FUTURE CAMPAIGN": "The Future Campaign",
+  "Featyre styling": "The Future Campaign",
 };
 
 async function main() {
